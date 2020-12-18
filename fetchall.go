@@ -13,10 +13,10 @@ import (
 func main() {
 	start := time.Now()
 	ch := make(chan string)
-	for _, url := range os.Args[1:]{
-		go fetch(url, ch)  // 启动一个goroutine
+	for _, url := range os.Args[1:] {
+		go fetch(url, ch) // 启动一个goroutine
 	}
-	for range os.Args[1:]{
+	for range os.Args[1:] {
 		fmt.Println(<-ch) // 从通道ch接受
 	}
 	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
@@ -39,9 +39,7 @@ func fetch(url string, ch chan<- string) {
 	ch <- fmt.Sprintf("%.2fs  %d   %s", secs, nbytes, url)
 }
 
-
 // 找一个产生大量数据得网站，连续两次运行fetchall, 看报告得时间是否会有大得变化， 调查缓存情况。每一次获取得内容
 // 一样吗？修改fetchall将内容输出到文件
 
-
-// 使用更长的参数列表来尝试
+// 使用更长的参数列表来尝试fetchall,例如使用alexa.com排名前一百万的网站。如果一个网站没有响应，程序的行为是怎么样的？
